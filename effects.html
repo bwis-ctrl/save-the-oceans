@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" href="wave.png">
+    <title>Protect the Oceans</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Montserrat, sans-seriff;
+            cursor: url("turtle.png"), auto;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 20px 80px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            gap: 60px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* BACKGROUND */
+        .video-container {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url("steelblue.jpg"); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* OVERLAY */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+
+        /* TEXT */
+        .hero-text {
+            position: absolute;
+            top: 25%;
+            left: 6%;
+            transform: translateY(-10%);
+            color: white;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 50px;
+            margin: 0;
+        }
+
+        .hero-text p {
+            margin-top: 15px;
+            font-size: 20px;
+            max-width: 450px;
+            line-height: 1.4;
+            padding: 15px 20px;
+            border: 2px solid white;
+            background: transparent;
+        }
+
+        /* CARDS */
+        .card-container {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            display: grid;
+            grid-template-columns: repeat(3, 160px);
+            gap: 60px 80px;
+            z-index: 2;
+        }
+
+        .flip-card {
+            width: 160px;
+            height: 220px;
+            perspective: 1000px;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .flip-card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flip-card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* BACK (solid grey) */
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background: #d3d3d3;
+            color: white;
+            padding: 15px;
+            font-size: 10px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        /* ✅ FIXED ACTIVE STATE (centered + not touching edges) */
+        .flip-card.active {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(2.2);
+
+            max-width: 80vw;
+            max-height: 80vh;
+
+            z-index: 999;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .flip-card.active .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+    </style>
+</head>
+
+<body onclick="closeCard()">
+
+<div class="video-container">
+
+    <div class="navbar">
+        <div class="logo">EFFECTS</div>
+
+        <div class="nav-links">
+            <a href="mmhome.html">Home</a>
+            <a href="problem.html">Problem</a>
+            <a href="effects.html">Effects</a>
+            <a href="solutions.html">Solutions</a>
+            <a href="takeaction.html">Take Action</a>
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="hero-text">
+        <h1>It Doesn't Just Hurt The Fish</h1>
+
+        <p>
+           Ocean pollution doesn’t just hurt sea life. It comes back to affect humans in a lot of real ways.
+		   When plastic and chemicals enter the ocean, they can end up in the seafood people eat, which means 
+		   microplastics and toxins can make their way into our bodies over time. This can causes many health issues and
+		   diseases, such as cancer. Polluted oceans also damage fishing industries, 
+		   which many communities rely on for food and income. On top of that, dirty oceans can harm tourism and coastal economies, 
+		   and polluted water can contribute to unsafe swimming conditions. So even though the problem starts in the water, its 
+		   effects spread into human health, jobs, and everyday life.
+            Click through the following images to learn more. 
+        </p>
+    </div>
+
+    <!-- CARDS -->
+    <div class="card-container">
+
+        <div class="flip-card" onclick="openCard(event, this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="sick.png">
+                </div>
+                <div class="flip-card-back">
+                 Ocean pollution and microplastics can seriously affect human health
+				 because tiny plastic particles and harmful chemicals don’t just stay 
+				 in the ocean, they can enter the food chain. When people eat seafood that 
+				 has absorbed these pollutants, those substances can build up in the body over time. 
+				 Some of these chemicals are linked to long-term health problems, including hormone 
+				 disruption and an increased risk of diseases like cancer. Even though the pollution 
+				 starts far away in the ocean, it can eventually make its way into everyday foods and water, 
+				 quietly impacting human health in ways that aren’t always immediately visible.
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="openCard(event, this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="economy.png">
+                </div>
+                <div class="flip-card-back">
+                   Ocean pollution also hurts the economy in a major way because it damages industries 
+				   that depend on clean water. Fishing communities can lose income when fish populations 
+				   decline or become unsafe to eat due to contamination. Tourism is also affected, since
+				   polluted beaches and waterways discourage visitors and reduce business for coastal towns, 
+				   hotels, and restaurants. On top of that, governments and organizations have to spend large 
+				   amounts of money cleaning up pollution and dealing with its long-term environmental damage. 
+				   All of this adds up to fewer jobs, lower profits, and higher costs for everyone.
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="openCard(event, this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="sickanimal.png">
+                </div>
+                <div class="flip-card-back">
+                  Ocean pollution makes sea animals unsafe to eat because harmful substances like plastics, 
+				  oil, sewage, and toxic chemicals build up inside marine life over time. Small organisms often 
+				  mistake microplastics for food, and those particles then move up the food chain as bigger animals eat them.
+				  As a result, fish and seafood can accumulate pollutants that are dangerous for both wildlife and humans. 
+				  These contaminants can damage organs, interfere with growth and reproduction, and weaken immune systems, 
+				  making animals more likely to get sick or die. This doesn’t just affect individual species—it can disrupt 
+				  entire marine ecosystems and reduce the safety and reliability of seafood people depend on.
+                </div>
+            </div>
+        </div>
+
+      
+
+<script>
+let currentCard = null;
+
+function openCard(event, card) {
+    event.stopPropagation();
+    if (currentCard) return;
+
+    currentCard = card;
+    card.classList.add("active");
+}
+
+function closeCard() {
+    if (currentCard) {
+        currentCard.classList.remove("active");
+        currentCard = null;
+    }
+}
+</script>
+
+</body>
+</html>

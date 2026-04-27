@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" href="wave.png">
+    <title>Protect the Oceans</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Montserrat, sans-seriff;
+            cursor: url("turtle.png"), auto;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 20px 80px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            gap: 60px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* BACKGROUND */
+        .video-container {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url("steelblue.jpg"); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* OVERLAY */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+
+        /* TEXT */
+        .hero-text {
+            position: absolute;
+            top: 25%;
+            left: 6%;
+            transform: translateY(-10%);
+            color: white;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 50px;
+            margin: 0;
+        }
+
+        .hero-text p {
+            margin-top: 15px;
+            font-size: 20px;
+            max-width: 450px;
+            line-height: 1.4;
+            padding: 15px 20px;
+            border: 2px solid white;
+            background: transparent;
+        }
+
+        /* CARDS */
+        .card-container {
+            position: absolute;
+            top: 22%;
+            left: 50%;
+            display: grid;
+            grid-template-columns: repeat(3, 160px);
+            gap: 60px 80px;
+            z-index: 2;
+        }
+
+        .flip-card {
+            width: 160px;
+            height: 220px;
+            perspective: 1000px;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .flip-card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flip-card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* BACK (solid grey) */
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background: #d3d3d3;
+            color: white;
+            padding: 15px;
+            font-size: 10px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        /* ✅ FIXED ACTIVE STATE (centered + not touching edges) */
+        .flip-card.active {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(2.2);
+
+            max-width: 80vw;
+            max-height: 80vh;
+
+            z-index: 999;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .flip-card.active .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+    </style>
+</head>
+
+<body onclick="closeCard()">
+
+<div class="video-container">
+
+    <div class="navbar">
+        <div class="logo">PROBLEMS</div>
+
+        <div class="nav-links">
+            <a href="mmhome.html">Home</a>
+            <a href="problem.html">Problem</a>
+            <a href="effects.html">Effects</a>
+            <a href="solutions.html">Solutions</a>
+            <a href="takeaction.html">Take Action</a>
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="hero-text">
+        <h1>Oceans Pollutants</h1>
+
+        <p>
+            Ocean pollution is slowly killing our oceans and the creatures that inhabit it.
+            When people think about ocean pollution, they typically think of garbage in the oceans.
+            However, threats to the ocean extend much farther than simply human waste, such as plastics,
+            discarded into the ocean. In order to begin to help preserve the oceans, you must first understand
+            all of the things that are hurting them. When we understand what we are doing to harm the oceans, we can 
+            begin to become more conscience of the choices we make and understand how to help and prevent further damage. 
+            Click through the following images to learn more. 
+        </p>
+    </div>
+
+    <!-- CARDS -->
+    <div class="card-container">
+
+        <div class="flip-card" onclick="openCard(event, this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="waterbottle.png">
+                </div>
+                <div class="flip-card-back">
+                 The ocean has become the biggest victim of plastic.
+				 At least 14 million tons of plastic end up in the ocean each year,
+				 which makes up to 80% of marine debris. Animals may confuse plastic with food 
+				 and attempt to eat it, which ultimately leads to the animal suffocating and dying. 
+				 Plastics such as bottles and bags can take anywhere from 20-450 years to decompose. 
+				 Not only do these plastics directly harm marine life, but they also harm the ocean's enviroment 
+				 as they decompose due to the chemicals they contain. If plastic pollution in the ocean continues 
+				 at the rate it is currently at, by 2050 it is estimated that there will be more plastic in the ocean than fish.
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="openCard(event, this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="oilbarrel.png">
+                </div>
+                <div class="flip-card-back">
+                   Oil pollution is one of the most destructive forms of 
+				   ocean contamination. Large oil spills and everyday leaks 
+				   from ships release millions of gallons of oil into the ocean each year. 
+				   This oil spreads quickly across the surface, forming a thick layer that 
+				   blocks sunlight and reduces oxygen levels in the water. Marine animals 
+				   such as birds, fish, and mammals can become coated in oil, which damages 
+				   their skin, feathers, and fur, often leading to hypothermia, poisoning, 
+				   or death. Oil can also sink and contaminate coral reefs and ocean floors, 
+				   causing long-term damage to entire ecosystems. Even small amounts of oil 
+				   pollution can have lasting effects, making it extremely difficult for 
+				   affected areas to fully recover.
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="openCard(event, this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="wastewater.png">
+                </div>
+                <div class="flip-card-back">
+                    Runoff waste is a major source of ocean pollution that often 
+					goes unnoticed. When it rains, water flows over land and collects 
+					pollutants such as trash, chemicals, fertilizers, and oils before 
+					carrying them into rivers and eventually the ocean. This polluted runoff 
+					can introduce harmful substances into marine environments, disrupting 
+					ecosystems and harming wildlife. Excess nutrients from fertilizers can 
+					cause algal blooms, which reduce oxygen levels in the water and 
+					create “dead zones” where marine life cannot survive. 
+					Runoff pollution not only affects ocean health but 
+					also impacts coastal communities that rely on clean 
+					water for fishing and recreation.
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="openCard(event, this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="fishingnet.png">
+                </div>
+                <div class="flip-card-back">
+                    Discarded or lost fishing gear, often called “ghost gear,” is
+					a serious threat to ocean life. Items such as fishing nets, lines, 
+					and traps can remain in the ocean for decades, continuing to trap and kill 
+					marine animals long after they are abandoned. Fish, sea turtles, and even 
+					large mammals like whales can become entangled in these materials, leading 
+					to injury, suffocation, or starvation. Because most fishing gear is made of 
+					durable plastics, it does not easily break down and can continue harming 
+					ecosystems for many years. Ghost gear not only affects marine life but also 
+					damages coral reefs and disrupts natural habitats.
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="openCard(event, this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="lightbulb.png">
+                </div>
+                <div class="flip-card-back">
+                    Light pollution is an often overlooked but harmful form of ocean pollution. 
+					Artificial lights from coastal cities, ships, and offshore structures can 
+					disrupt the natural behaviors of marine animals. Many species rely on natural 
+					light patterns from the moon and stars to navigate, hunt, and reproduce. 
+					For example, sea turtle hatchlings use the light of the moon to find their 
+					way to the ocean, but artificial lights can confuse them and lead them away 
+					from the water. Light pollution can also interfere with feeding patterns and
+					migration routes of fish and other marine organisms. Over time, these disruptions 
+					can negatively impact entire ecosystems.
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="openCard(event, this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="pesticide.png">
+                </div>
+                <div class="flip-card-back">
+                   Pesticide pollution enters the ocean through agricultural runoff and can have 
+				   severe effects on marine life. Chemicals used to protect crops are often washed 
+				   into nearby waterways during rainfall, eventually reaching the ocean. These substances 
+				   can be toxic to fish, plankton, and other organisms that form the base of the marine food chain. 
+				   As pesticides accumulate in the bodies of marine animals, they can move up the food chain in a 
+				   process known as bioaccumulation, affecting larger predators and even humans who consume seafood. 
+				   Long-term exposure to pesticides can disrupt reproduction, weaken immune systems, and lead to 
+				   population declines in many species.
+                </div>
+            </div>
+        
+    </div>
+
+</div>
+
+<script>
+let currentCard = null;
+
+function openCard(event, card) {
+    event.stopPropagation();
+    if (currentCard) return;
+
+    currentCard = card;
+    card.classList.add("active");
+}
+
+function closeCard() {
+    if (currentCard) {
+        currentCard.classList.remove("active");
+        currentCard = null;
+    }
+}
+</script>
+
+</body>
+</html>

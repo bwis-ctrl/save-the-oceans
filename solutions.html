@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel="icon" type="image/png" href="wave.png">
+    <title>Solutions</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Montserrat, sans-seriff;
+            cursor: url("turtle.png"), auto;
+        }
+
+        /* NAVBAR (UNCHANGED) */
+        .navbar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 20px 80px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* BACKGROUND (UNCHANGED) */
+        .video-container {
+            position: relative;
+            height: 100vh;
+            background-image: url("steelblue.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* OVERLAY */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+
+        /* HERO TEXT */
+        .hero-center {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .hero-center h1 {
+            font-size: 60px;
+            margin: 0;
+        }
+
+        .hero-center p {
+            font-size: 20px;
+            margin-top: 12px;
+            max-width: 600px;
+        }
+
+        /* =========================
+           FLIP CARD ROW
+        ========================= */
+
+        .image-row {
+            position: absolute;
+            top: 52%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 25px;
+            z-index: 2;
+        }
+
+        .flip-card {
+            width: 300px;
+            height: 240px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .flip-card.active .flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-front,
+        .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            backface-visibility: hidden;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 12px;
+            box-sizing: border-box;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .flip-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .flip-back {
+            background: rgba(255,255,255,0.95);
+            color: #0b1f2a;
+            transform: rotateY(180deg);
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="video-container">
+
+    <div class="navbar">
+        <div class="logo">SOLUTIONS</div>
+
+        <div class="nav-links">
+            <a href="mmhome.html">Home</a>
+            <a href="problem.html">Problem</a>
+            <a href="effects.html">Effects</a>
+            <a href="solutions.html">Solutions</a>
+            <a href="takeaction.html">Take Action</a>
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="hero-center">
+        <h1>How Can We Sea Change?</h1>
+        <p>"but I'm just one person, how can I make a difference?"</p>
+    </div>
+
+    <!-- FLIP CARDS -->
+    <div class="image-row">
+
+        <div class="flip-card" onclick="toggleCard(this)">
+            <div class="flip-inner">
+                <div class="flip-front">
+                    <img src="reusables.png">
+                </div>
+                <div class="flip-back">
+                    People can help ocean conservation by using sustainable and reusable
+					materials in their daily lives. Choosing items like reusable water bottles, 
+					cloth bags, and metal or glass containers reduces the amount of plastic waste 
+					that ends up in the ocean. Small changes in what we buy and use every day can 
+					significantly cut down on pollution over time.
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="toggleCard(this)">
+            <div class="flip-inner">
+                <div class="flip-front">
+                    <img src="savewater.png">
+                </div>
+                <div class="flip-back">
+                    Conserving water is another important way to help reduce ocean pollution. 
+					When less water is wasted, there is less runoff carrying fertilizers, chemicals, 
+					and trash from land into rivers and eventually the ocean. Simple actions like turning
+					off taps when not in use and fixing leaks can make a meaningful difference.
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="toggleCard(this)">
+            <div class="flip-inner">
+                <div class="flip-front">
+                    <img src="cleanup.png">
+                </div>
+                <div class="flip-back">
+                    Joining ocean or beach clean-ups is a direct way people can help protect marine environments. 
+					These events remove trash and plastic before they break down into harmful microplastics. They 
+					also help restore habitats and give people a chance to see the impact of pollution firsthand, 
+					which can be very motivating.
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="toggleCard(this)">
+            <div class="flip-inner">
+                <div class="flip-front">
+                    <img src="educate.png">
+                </div>
+                <div class="flip-back">
+                    People can also make a big impact by advocating and educating others about ocean pollution. 
+					Sharing information with friends, family, and communities helps spread awareness and encourages
+					more people to take action. The more people understand the issue, the more collective change can happen.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CLICK ANYWHERE TO CLOSE + LOGIC -->
+<script>
+let activeCard = null;
+
+function toggleCard(card) {
+    if (activeCard && activeCard !== card) {
+        activeCard.classList.remove("active");
+    }
+
+    card.classList.toggle("active");
+    activeCard = card.classList.contains("active") ? card : null;
+}
+
+document.addEventListener("click", function (e) {
+    if (!e.target.closest(".flip-card")) {
+        if (activeCard) {
+            activeCard.classList.remove("active");
+            activeCard = null;
+        }
+    }
+});
+</script>
+
+</body>
+</html>

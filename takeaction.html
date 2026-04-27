@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" type="image/png" href="wave.png">
+  <title>Take Action!</title>
+
+  <!-- Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+   
+    html, body {
+      margin: 0;
+      background: url("steelblue.jpg") no-repeat center center fixed;
+      background-size: cover;
+      cursor: url("turtle.png"), auto;
+      font-family: 'Montserrat', sans-serif !important;
+    }
+
+    * {
+      font-family: 'Montserrat', sans-serif !important;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 80px;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+
+    .logo {
+      color: white;
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 60px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    /* TIMER */
+    #timer {
+      position: fixed;
+      top: 85px;
+      right: 30px;
+      background: rgba(255,255,255,0.85);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      z-index: 1500;
+    }
+
+    /* GAME */
+    .maze-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 140px;
+    }
+
+    .maze {
+      display: grid;
+      grid-template-columns: repeat(11, 80px);
+      grid-template-rows: repeat(11, 80px);
+      gap: 8px;
+    }
+
+    .cell {
+      width: 80px;
+      height: 80px;
+      border-radius: 14px;
+      background: #caf0f8;
+    }
+
+    .wall {
+      background: #023e8a;
+    }
+
+    .ship {
+      background-image: url("sailboat.png");
+      background-size: 70%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .trash1,
+    .trash2,
+    .trash3,
+    .trash4 {
+      background-size: 60%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .trash1 { background-image: url("waterbottle.png"); }
+    .trash2 { background-image: url("oilspill.png"); }
+    .trash3 { background-image: url("tire.png"); }
+    .trash4 { background-image: url("oldboot.png"); }
+
+    /* POPUPS */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .popup-box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">TAKE ACTION</div>
+
+  <div class="nav-links">
+    <a href="mmhome.html">Home</a>
+    <a href="problem.html">Problem</a>
+    <a href="effects.html">Effects</a>
+    <a href="solutions.html">Solutions</a>
+    <a href="takeaction.html">Take Action</a>
+  </div>
+</div>
+
+<!-- TIMER -->
+<div id="timer">Time: 30</div>
+
+<!-- GAME -->
+<div class="maze-container">
+  <div class="maze" id="maze"></div>
+</div>
+
+<!-- START POPUP -->
+<div class="popup" id="startPopup" style="display:flex;">
+  <div class="popup-box">
+    <h2>Use arrow keys to clean the ocean before time runs out!</h2>
+    <button onclick="startGame()">Start</button>
+  </div>
+</div>
+
+<!-- GAME OVER POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-box" id="popupText"></div>
+</div>
+
+<script>
+
+// ================= GAME LOGIC (UNCHANGED) =================
+
+const maze = document.getElementById("maze");
+const size = 11;
+let cells = [];
+
+let playerIndex = 13;
+let gameStarted = false;
+let timeLeft = 30;
+let timerInterval;
+
+const layout = [
+1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,1,0,1,0,1,0,0,1,
+1,0,1,1,0,0,0,1,1,0,1,
+1,0,0,0,1,1,0,0,1,0,1,
+1,1,1,0,0,0,0,1,0,0,1,
+1,0,0,1,0,1,0,1,1,0,1,
+1,0,1,0,0,0,1,0,0,0,1,
+1,0,1,1,1,0,0,1,1,0,0,
+1,0,0,0,0,1,0,0,0,1,0,
+1,1,1,1,0,0,0,1,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1
+];
+
+let trashTypes = [
+  "trash1","trash2","trash3","trash4",
+  "trash1","trash2","trash3","trash4",
+  "trash1","trash2","trash3","trash4",
+  "trash1","trash2"
+];
+
+function tooClose(tile, placed) {
+  for (let p of placed) {
+    let dx = Math.abs((tile % size) - (p % size));
+    let dy = Math.abs(Math.floor(tile / size) - Math.floor(p / size));
+    if (dx <= 1 && dy <= 1) return true;
+  }
+  return false;
+}
+
+function createMaze() {
+  maze.innerHTML = "";
+  cells = [];
+
+  let validTiles = [];
+
+  layout.forEach((value, index) => {
+    const cell = document.createElement("div");
+    cell.classList.add("cell");
+
+    if (value === 1) cell.classList.add("wall");
+    else validTiles.push(index);
+
+    maze.appendChild(cell);
+    cells.push(cell);
+  });
+
+  let placed = [];
+  window.trashPositions = {};
+
+  for (let i = 0; i < trashTypes.length; i++) {
+    let tile, tries = 0;
+
+    do {
+      tile = validTiles[Math.floor(Math.random() * validTiles.length)];
+      tries++;
+    } while (tooClose(tile, placed) && tries < 50);
+
+    placed.push(tile);
+    window.trashPositions[tile] = trashTypes[i];
+
+    cells[tile].classList.add(trashTypes[i]);
+  }
+
+  cells[playerIndex].classList.add("ship");
+}
+
+function startGame() {
+  document.getElementById("startPopup").style.display = "none";
+  gameStarted = true;
+  createMaze();
+  startTimer();
+}
+
+function startTimer() {
+  const timerDisplay = document.getElementById("timer");
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timerDisplay.innerText = "Time: " + timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      showPopup("You failed to clean the ocean and all the sea creatures died :(");
+      gameStarted = false;
+    }
+  }, 1000);
+}
+
+document.addEventListener("keydown", move);
+
+function move(e) {
+  if (!gameStarted) return;
+
+  let newIndex = playerIndex;
+
+  if (e.key === "ArrowUp") newIndex -= size;
+  if (e.key === "ArrowDown") newIndex += size;
+  if (e.key === "ArrowLeft") newIndex -= 1;
+  if (e.key === "ArrowRight") newIndex += 1;
+
+  if (!cells[newIndex] || cells[newIndex].classList.contains("wall")) return;
+
+  cells[playerIndex].classList.remove("ship");
+  playerIndex = newIndex;
+
+  if (window.trashPositions[playerIndex]) {
+    cells[playerIndex].classList.remove(window.trashPositions[playerIndex]);
+    delete window.trashPositions[playerIndex];
+  }
+
+  cells[playerIndex].classList.add("ship");
+
+  checkGame();
+}
+
+function checkGame() {
+  const remaining = Object.keys(window.trashPositions).length;
+
+  if (remaining === 0) {
+    clearInterval(timerInterval);
+    showPopup("Winner! 🎉 You cleaned the ocean!");
+    gameStarted = false;
+  }
+}
+
+function showPopup(message) {
+  document.getElementById("popup").style.display = "flex";
+  document.getElementById("popupText").innerHTML =
+    `<h2>${message}</h2><button onclick="location.reload()">Restart</button>`;
+}
+
+</script>
+
+</body>
+</html>

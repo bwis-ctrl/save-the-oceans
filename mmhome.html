@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel="icon" type="image/png" href="wave.png">
+    <title>Take Action</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Montserrat, sans-seriff;
+            cursor: url("turtle.png"), auto;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 20px 80px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+			font-size: 18px;
+        }
+
+        /* HERO SECTION */
+        .video-container {
+            position: relative;
+            height: 100vh;
+            background-image: url("ocean.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+			
+			
+        }
+
+        /* OVERLAY */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+
+        /* TEXT */
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            transform: translateY(-50%);
+            color: white;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 60px;
+            margin: 0;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+        }
+
+        /* ✅ NEW WHITE INFO BOX */
+        .info-panel {
+            position: absolute;
+            top: 50%;
+            right: 8%;
+            transform: translateY(-50%);
+            width: 320px;
+            padding: 25px;
+
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 2;
+
+            color: #0b1f2a;
+        }
+
+        .info-panel h2 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        .info-panel p {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+
+        /* INFO SECTION (BELOW HERO) */
+        .info-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 100px 20px;
+            background: #0b1f2a;
+            flex-wrap: wrap;
+        }
+
+        .info-box {
+            width: 220px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .info-box h2 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .info-box p {
+            font-size: 20px;
+            line-height: 1.4;
+        }
+		
+		.side-box {
+    position: absolute;
+    right: 35%;   /* controls horizontal placement */
+    width: 400px;
+    height: 300px;
+
+    background: rgba(255,255,255,0.85);
+    border-radius: 12px;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+	}
+
+	/* top box */
+	.box-top {
+    top: 11%;
+	}
+
+	/* bottom box */
+	.box-bottom {
+    top: 52%;
+	}
+
+	/* optional: make images fit nicely */
+	.side-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+	}
+		
+		
+ </style>
+</head>
+
+<body>
+
+<div class="video-container">
+
+    <div class="navbar">
+        <div class="logo">OCEAN PRESERVATION</div>
+
+        <div class="nav-links">
+            <a href="mmhome.html">Home</a>
+            <a href="problem.html">Problem</a>
+            <a href="effects.html">Effects</a>
+            <a href="solutions.html">Solutions</a>
+            <a href="takeaction.html">Take Action</a>
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="hero-text">
+        <h1>Save Our Oceans</h1>
+    </div>
+
+<!-- TOP BOX -->
+<div class="side-box box-top">
+    <img src="graph1.png" alt="Chart or image">
+</div>
+
+<!-- BOTTOM BOX -->
+<div class="side-box box-bottom">
+    <img src="graph2.png" alt="Chart or image">
+</div>
+
+     <div class="info-panel">
+        <h2>Overview</h2>
+        <p>
+            College students are one of the most influential groups in shaping environmental change.
+			Campuses are powerful communities where ideas spread quickly and change
+			happens fast.Ocean pollution is an evergrowing issue, and one might wonder
+			how it personally affects them. Pollution of the ocean poses threats to human health,
+			the flow of ecosystems, and even the economy. 
+			By reducing waste, choosing reusable products, and raising awareness, 
+			you can help shift entire groups toward protecting the ocean.
+			While it may not always be easy to see, protecting the oceans also protects people.
+			
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>
